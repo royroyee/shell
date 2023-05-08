@@ -132,7 +132,7 @@ $ cat < linux.txt
 - linux.txt 파일로부터 읽은 값을 cat의 표준 입력으로 사용한다.
   - cat linux.txt 와 동일한 의미
 
-#### [표준 입출력, 표준 에러 출력 및 더 다양한 리다이렉션 조합]()
+#### [표준 입출력, 표준 에러 출력 및 더 다양한 리다이렉션 조합](https://github.com/royroyee/shell/tree/main/02-variable-control#%ED%91%9C%EC%A4%80-%EC%9E%85%EC%B6%9C%EB%A0%A5-%EB%B0%8F-%ED%91%9C%EC%A4%80-%EC%97%90%EB%9F%AC-%EC%B6%9C%EB%A0%A5)
 
 ## 7. sed(문자열 치환, 삭제, 출력)
 - stream editor , 텍스트를 변형하고 출력하는 **텍스트 편집 도구**
