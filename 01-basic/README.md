@@ -460,6 +460,58 @@ a  even_2  even_4  odd_1  odd_3
 
 ---
 
+## 서브쉘(subshell)
+
+### 서브쉘
+- 쉘 안에서 다른 쉘을 실행시키는 것
+- 터미널에서 작동 중인 배시와는 다른 프로세스로 작동하기 때문
+- 부모 쉘의 환경 변수와 함수를 상속받지만, 서브쉘 안에서 만든 변수와 함수는 부모 쉘로 전달되지 않는다.
+
+### 기본 예제
+```shell
+#!/bin/bash
+
+mkdir dir1
+mkdir dir2
+mkdir dir3
+
+for dir in dir1 dir2 dir3
+do 
+   cd $dir
+   touch file.txt
+   cd .. # 여기가 point!
+done
+```
+- for 문에서 디렉토리를 바꾸고, 다시 부모 디렉토리를 돌아가기 위해 `cd ..` 를 수행하는 모습
+- 이러한 부분은 스크립트가 복잡해질 수록 지저분해진다.
+
+```shell
+#!/bin/bash
+
+mkdir dir1
+mkdir dir2
+mkdir dir3
+
+for dir in dir1 dir2 dir3
+do
+  (cd $dir
+  touch file.txt)
+done
+```
+
+#### 참고
+사실은 위의 스크립트를 더 최적화 해보면?(서브쉘 사용하지 않기)
+```shell
+#!/bin/bash
+
+mkdir dir{1..3}
+for dir in dir{1..3}; do
+  (cd "$dir" && touch file.txt) # 서브쉘을 사용하지 않고 명령어 한 줄로 표현
+done
+```
+
+---
+
 ## 실전 예제
 
 ###  파일명 검색
