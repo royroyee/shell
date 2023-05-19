@@ -50,7 +50,7 @@ echo `cat /proc/version` # kernel version
 ```
 
 
-### 계산기(숫자 두개)
+### 계산기(숫자 두개) (calculator.sh)
 ```
 #!/bin/bash
 
