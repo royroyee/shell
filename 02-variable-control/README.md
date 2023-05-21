@@ -479,3 +479,68 @@ $ [ -e unfile ] || touch unfile
 $ echo I am a perfect human | (read a; echo ${a^^})
 I AM A PERFECT HUMAN
 ``` 
+
+
+## BASH IFS
+IFS 는 Internal Field Separator 의 약자로, 외부프로그램을 실행할 때 입력되는 문자열을 나눌 때 기준이 되는 문자를 정의하는 환경 변수
+
+- 디폴트 값 : 공백/탭/개행 문자
+
+```shell
+#!/usr/bin/bash
+
+mystring="foo bar baz rab"
+
+for word in $mystring; do
+    echo Word : "$word"
+done
+
+$ bash script.sh
+Word: foo
+Word: bar
+Word: baz
+Word: rab
+```
+- IFS 는 환경변수로 기본 값이 공백으로 되어있기 때문에 해당 for문에서 공백으로 구분되어 출력됨
+
+```shell
+PROGRAMMING="
+go programming
+c programming
+java programming
+" # 개행이 있는 문자열
+
+echo "---------------------"
+
+for p in $PROGRAMMING; do
+   echo $p #IFS 는 먼저 공백으로 구분 -> 없으면 개행으로 구분
+done
+
+# IFS를 줄바꿈으로 변경
+OLD_IFS="$IFS"
+IFS=$'\n'
+
+echo "---------------------"
+for p in $PROGRAMMING; do
+  ehco $p
+done
+
+IFS="$OLD_IFS" # 환경변수이기 때문에 항상 돌려주는 습관 필요
+
+
+
+$ bash test.sh
+
+-------------------------
+go
+programming
+c
+programming
+java
+programming
+-------------------------
+go programming
+c programming
+java programming
+```
+- IFS 는 환경변수이므로 롤백 해주는 것이 중요하다.
